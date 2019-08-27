@@ -76,7 +76,7 @@ gcloud compute firewall-rules create default-puma-server\
 
 
 1. Шаблон создания базового образа ```packer/ubuntu16.json``` настройка осуществляется скриптами
-    - Для создания базового образа указать параметр ```source_image_family``` в значение ```ubuntu-1604-lts```
+    - Для создания базового образа указать параметр ```source_image_family``` со значением ```ubuntu-1604-lts```
     - ```packer/scripts/install_mongodb.sh```
     - ```packer/scripts/install_ruby.sh```
 
@@ -97,7 +97,10 @@ packer build -var-file variables.json ubuntu16.json
 packer build -var-file variables.json immutable.json
 ```
 
-6. Создание инстанса в GCP с запущенным приложением осуществляется скриптом ```config-scripts/create-reddit-vm.sh```
+6. Создание инстанса в GCP с запущенным приложением осуществляется скриптом 
+    ```
+    config-scripts/create-reddit-vm.sh
+    ```
     - Команда запуска:
        ```
        ./config-scripts/create-reddit-vm.sh project_id
