@@ -33,3 +33,40 @@ User appuser
 Host someinternalhost 
 ProxyCommand ssh -q bastion nc -q0 10.156.0.3 22
 ```
+
+## Home Work №4
+## Основные сервисы GCP
+
+Параметры подключения:
+```
+testapp_IP = 35.228.252.20
+testapp_port = 9292
+```
+### Деплой приложения
+
+1. Скрипт ```install_ruby.sh``` устанавливает Ruby
+2. скрипт ```install_mongodb.sh``` устанавливает MongoDB
+3. Скрипт ```deploy.sh``` устанавливает приложение
+
+4. Для создание инстанса и его настройки необходимо выполнить скрипт ``` gcloud_deploy.sh ```
+
+Команда для создания инстанса с приминением startup script
+
+```
+gcloud compute instances create reddit-app\
+  --zone=europe-north1-a \
+  --boot-disk-size=10GB \
+  --image-family ubuntu-1604-lts \
+  --image-project=ubuntu-os-cloud \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --metadata-from-file startup-script=./setup_script.sh
+```
+
+5. Для создания правила firewall использовать команду:
+
+```
+gcloud compute firewall-rules create default-puma-server\
+  --allow tcp:9292
+```
