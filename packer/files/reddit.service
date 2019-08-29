@@ -1,0 +1,15 @@
+[Unit]
+Description=Puma Web Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/appuser/reddit
+ExecStart=/usr/local/bin/puma
+ExecStop=/bin/kill -15 $MAINPID
+Restart=on-failure
+StandardOutput=/home/appuser/reddit/reddit.log
+StandardError=/home/appuser/reddit/reddit_error.log
+
+[Install]
+WantedBy=multi-user.target
